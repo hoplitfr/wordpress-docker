@@ -5,7 +5,8 @@ services:
   db:
     image: mysql:5.7
     volumes:
-      - ./sql:/docker-entrypoint-initdb.d # Ne pas laisser d'instruction CREATE DATABASE dans le fichier SQL
+      - ./docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d # Volume pour l'initialisation de la base de données - Ne pas laisser d'instruction CREATE DATABASE dans le fichier SQL
+      - ./sql:/var/lib/mysql # Volume pour stocker la base de données
     environment:
       MYSQL_ROOT_PASSWORD: your_root_password
       MYSQL_DATABASE: wordpress
