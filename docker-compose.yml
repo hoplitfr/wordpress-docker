@@ -1,14 +1,12 @@
-version: '3'
-
 services:
   # MySQL service
   db:
-    image: mysql:5.7
+    image: mysql:latest
     volumes:
       - ./docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d # Volume pour l'initialisation de la base de données - Ne pas laisser d'instruction CREATE DATABASE dans le fichier SQL
       - ./sql:/var/lib/mysql # Volume pour stocker la base de données
     environment:
-      MYSQL_ROOT_PASSWORD: your_root_password
+      MYSQL_ROOT_PASSWORD: root_password
       MYSQL_DATABASE: wordpress
       MYSQL_USER: wordpress_user
       MYSQL_PASSWORD: wordpress_password
@@ -24,7 +22,7 @@ services:
       - "8080:80"
     environment:
       PMA_HOST: db
-      MYSQL_ROOT_PASSWORD: your_root_password # Le même mot de passe que celui défini pour MYSQL_ROOT_PASSWORD dans le service MySQL
+      MYSQL_ROOT_PASSWORD: root_password # Le même mot de passe que celui défini pour MYSQL_ROOT_PASSWORD dans le service MySQL
 
   # WordPress service
   wordpress:
